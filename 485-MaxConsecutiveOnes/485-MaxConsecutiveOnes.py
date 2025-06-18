@@ -1,14 +1,15 @@
-# Last updated: 6/17/2025, 10:34:35 PM
+# Last updated: 6/18/2025, 5:08:15 PM
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
-    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
-        max_length = 0
-        counter = 0
-        for i in range(len(nums)):
-            if nums[i] == 1:
-                counter += 1
-            else:
-                max_length = max(counter, max_length)
-                counter = 0
-
-        return max(max_length, counter)
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if root is None:
+            return 0
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
+        return max(left,right)+1
         
