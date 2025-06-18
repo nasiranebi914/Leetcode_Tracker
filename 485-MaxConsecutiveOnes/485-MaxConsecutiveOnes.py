@@ -1,4 +1,4 @@
-# Last updated: 6/18/2025, 5:08:15 PM
+# Last updated: 6/18/2025, 5:46:47 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,10 +6,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def maxDepth(self, root: Optional[TreeNode]) -> int:
-        if root is None:
-            return 0
-        left = self.maxDepth(root.left)
-        right = self.maxDepth(root.right)
-        return max(left,right)+1
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
         
