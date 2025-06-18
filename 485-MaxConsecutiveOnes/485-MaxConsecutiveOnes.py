@@ -1,4 +1,4 @@
-# Last updated: 6/18/2025, 5:55:21 PM
+# Last updated: 6/18/2025, 6:41:23 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,8 +6,11 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        if root is None:
-            return []
-        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val]
-        
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if p is None and q is None:
+            return True
+        if p is None or q is None:
+            return False
+        if p.val != q.val:
+            return False
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
