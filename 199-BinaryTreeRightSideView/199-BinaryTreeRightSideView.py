@@ -1,4 +1,4 @@
-# Last updated: 6/23/2025, 2:52:34 PM
+# Last updated: 6/23/2025, 9:47:10 PM
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,23 +6,17 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        res = []
-        if not root:
-            return res
-            
-        q = collections.deque()
-        q.append(root)
-        while q:
-            level = []
-            qLen = len(q)
-            for i in range(qLen):
-                node = q.popleft()
-                if node:
-                    level.append(node.val)
-                    q.append(node.left)
-                    q.append(node.right)
-            if level:
-                res.append(level[-1])
-        return res
-        
+    def goodNodes(self, root: TreeNode) -> int:        
+        def dfs(node, max_so_far):
+            if node is None:
+                return 0
+            if node.val >= max_so_far:
+                counter = 1
+            else:
+                counter = 0
+            max_so_far = max(max_so_far, node.val)
+            counter += dfs(node.left, max_so_far)
+            counter += dfs(node.right, max_so_far)
+            return counter
+                
+        return dfs(root, root.val)
