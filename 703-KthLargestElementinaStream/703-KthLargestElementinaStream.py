@@ -1,4 +1,4 @@
-# Last updated: 6/27/2025, 11:09:45 PM
+# Last updated: 6/30/2025, 4:09:22 PM
 import heapq
 class KthLargest:
 
@@ -6,16 +6,14 @@ class KthLargest:
         self.k = k
         self.heap = []
         for i in nums:
-            if len(self.heap) < k:
-                heapq.heappush(self.heap, i)
-            elif i > self.heap[0]:
-                heapq.heappushpop(self.heap, i)
+            heapq.heappush(self.heap, i)
+            if len(self.heap) > k:
+                heapq.heappop(self.heap)
         
     def add(self, val: int) -> int:
-        if len(self.heap) < self.k:
-            heapq.heappush(self.heap, val)
-        elif val > self.heap[0]:
-            heapq.heappushpop(self.heap, val)
+        heapq.heappush(self.heap, val)
+        if len(self.heap) > self.k:
+            heapq.heappop(self.heap)
         return self.heap[0]
         
 
