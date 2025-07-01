@@ -1,18 +1,26 @@
-# Last updated: 7/1/2025, 5:38:43 PM
+# Last updated: 7/1/2025, 6:51:55 PM
 class MedianFinder:
 
     def __init__(self):
-        self.arr = []
+        self.low = []
+        self.high = []
 
     def addNum(self, num: int) -> None:
-        self.arr.append(num)
+        # always add to low first
+        heapq.heappush(self.low, -num)
+        # move the largest of low to hight
+        heapq.heappush(self.high, -heapq.heappop(self.low))
+        # balance the heaps
+        if len(self.low) < len(self.high):
+            heapq.heappush(self.low, -heapq.heappop(self.high))
 
     def findMedian(self) -> float:
-        self.arr.sort()
-        if len(self.arr) % 2 != 0:
-            return self.arr[len(self.arr)//2]
+        # if low has more than high, return low
+        if len(self.low) > len(self.high):
+            return -self.low[0]
         else:
-            return (self.arr[len(self.arr)//2] + self.arr[len(self.arr) // 2 - 1]) / 2
+            return (-self.low[0] + self.high[0]) / 2
+        
         
 
 
