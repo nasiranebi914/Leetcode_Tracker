@@ -1,22 +1,14 @@
-# Last updated: 6/17/2025, 10:34:33 PM
-class Solution(object):
-    def nextGreaterElement(self, nums1, nums2):
-        ans = [-1] * (len(nums1))
+# Last updated: 7/16/2025, 2:06:25 PM
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         stack = []
-        index = {}
-        for i in range(len(nums2)-1,-1,-1):
-            while stack and stack[-1] <= nums2[i]:
-                stack.pop()
-            if nums2[i] in nums1:
-                if not stack:
-                    index[nums2[i]] = -1
-                else:
-                    index[nums2[i]] = stack[-1]
-            stack.append(nums2[i])
-        
-        for i,num in enumerate(nums1):
-            if num in index:
-                ans[i] = index[num]
-        return ans
+        ans = [-1] * len(nums1)
 
-        
+        for i in range(len(nums2)):
+            while stack and nums2[i] > nums2[stack[-1]]:
+                j = stack.pop()
+                if nums2[j] in nums1:
+                    index = nums1.index(nums2[j])
+                    ans[index] = nums2[i]
+            stack.append(i)
+        return ans
