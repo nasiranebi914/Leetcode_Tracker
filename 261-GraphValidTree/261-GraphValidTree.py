@@ -1,4 +1,4 @@
-# Last updated: 7/23/2025, 10:28:23 AM
+# Last updated: 7/23/2025, 10:28:55 AM
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
         if len(edges) != n-1:
@@ -18,6 +18,5 @@ class Solution:
                 if node == parent:
                     continue
                 dfs(neighbor, node)
-                    #return False
             return True
         return dfs(0,-1) and len(visited) == n
