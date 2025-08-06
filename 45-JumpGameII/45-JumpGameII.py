@@ -1,4 +1,4 @@
-# Last updated: 8/6/2025, 2:19:09 PM
+# Last updated: 8/6/2025, 3:17:27 PM
 class Solution:
     def jump(self, nums: List[int]) -> int:
         furthest = 0
