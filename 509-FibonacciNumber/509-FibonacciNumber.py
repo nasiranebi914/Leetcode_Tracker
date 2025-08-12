@@ -1,9 +1,9 @@
-# Last updated: 6/20/2025, 5:22:37 PM
-class Solution(object):
-    def fib(self, n):
-        if n == 0:
-            return 0
-        if n == 1:
-            return 1
-        return self.fib(n-1) + self.fib(n-2)
+# Last updated: 8/12/2025, 3:15:21 PM
+class Solution:
+    cache = {0:0, 1:1, 2:2}
+    def climbStairs(self, n: int) -> int:
+        for i in range(3, n+1):
+            self.cache[i] = self.cache[i-1] + self.cache[i-2]
+        return self.cache[n]
+
         
