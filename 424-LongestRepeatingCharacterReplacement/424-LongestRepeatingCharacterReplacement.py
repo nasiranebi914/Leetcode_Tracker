@@ -1,19 +1,12 @@
-# Last updated: 7/2/2025, 9:31:04 PM
+# Last updated: 8/11/2025, 10:27:58 PM
 class Solution:
-    def characterReplacement(self, s: str, k: int) -> int:
-        left = 0
-        max_window = 0
-        max_freq = 0
-        counter = defaultdict(int)
+    def fib(self, n: int) -> int:
+        if n <= 1: return n
+        cache = [0] * (n+1)
+        cache[1] = 1
 
-        for right in range(len(s)):
-            counter[s[right]] += 1
-            max_freq = max(max_freq, counter[s[right]])
+        for i in range(2, n+1):
+            cache[i] = cache[i-1] + cache[i-2]
 
-            while (right - left + 1) - max_freq > k:
-                counter[s[left]] -= 1
-                left += 1
-            max_window = max(max_window, right - left + 1)
-        return max_window
-
+        return cache[n]
         
