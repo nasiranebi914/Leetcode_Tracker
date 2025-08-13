@@ -1,14 +1,13 @@
-# Last updated: 8/12/2025, 8:32:50 PM
+# Last updated: 8/13/2025, 3:58:09 PM
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        house1 = 0
+        house2 = 0
         money = 0
-        h1 = 0
-        h2 = 0
 
         for i in range(len(nums)):
-            money = max(nums[i] + h1, h2)
-            h1 = h2
-            h2 = money
+            money = max(nums[i] + house1, house2)
+            house1 = house2
+            house2 = money
         return money
-
         
