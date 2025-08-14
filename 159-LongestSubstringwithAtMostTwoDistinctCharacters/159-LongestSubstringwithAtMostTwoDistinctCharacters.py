@@ -1,19 +1,15 @@
-# Last updated: 8/13/2025, 11:02:07 PM
+# Last updated: 8/14/2025, 1:38:15 PM
 class Solution:
-    def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
-        counter = 0
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        
+        seen = set()
         left = 0
-        max_len = 0
-        seen = defaultdict(int)
 
-        for right in range(len(s)):
-            seen[s[right]] += 1
-            while len(seen) > 2:
-                seen[s[left]] -= 1
-                if seen[s[left]] == 0:
-                    del seen[s[left]]
+        for right in range(len(nums)):
+            if nums[right] in seen:
+                return True
+            seen.add(nums[right])
+            if len(seen) > k:
+                seen.remove(nums[left])
                 left += 1
-            max_len = max(max_len, right - left + 1)
-        return max_len
-            
-            
+        return False
