@@ -1,17 +1,22 @@
-# Last updated: 7/2/2025, 2:54:47 PM
+# Last updated: 8/14/2025, 9:33:44 AM
 class Solution:
-    def findMaxAverage(self, nums: List[int], k: int) -> float:
+    def numKLenSubstrNoRepeats(self, s: str, k: int) -> int:
+        if k > len(s): return 0
+
         left = 0
-        max_average = float('-inf')
-        current_sum = 0
+        seen = set()
+        counter = 0
 
-        for right in range(len(nums)):
-            current_sum += nums[right]
-            if (right - left + 1) == k:
-                max_average = max(max_average, current_sum / k)
-                current_sum -= nums[left]
+        for right in range(len(s)):
+            while s[right] in seen:
+                seen.remove(s[left])
                 left += 1
-        return max_average
+            
+            seen.add(s[right])
 
-
+            if right - left + 1 >= k:
+                counter += 1
+                seen.remove(s[left])
+                left += 1
+        return counter
         
