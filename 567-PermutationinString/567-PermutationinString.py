@@ -1,13 +1,13 @@
-# Last updated: 8/13/2025, 9:58:14 PM
+# Last updated: 8/14/2025, 9:18:11 AM
 class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        left = 0
-        max_len = 0
-        seen = {}
+    def maxProfit(self, prices: List[int]) -> int:
+        max_profit = 0
+        buy = prices[0]
 
-        for right in range(len(s)):
-            if s[right] in seen and seen[s[right]] >= left:
-                left = seen[s[right]] + 1
-            seen[s[right]] = right
-            max_len = max(max_len, right - left + 1)
-        return max_len
+        for price in prices:
+            if price < buy:
+                buy = price
+            max_profit = max(max_profit, price - buy)
+        return max_profit
+
+        
