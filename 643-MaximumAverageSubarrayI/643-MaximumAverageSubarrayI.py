@@ -1,22 +1,18 @@
-# Last updated: 8/14/2025, 9:33:44 AM
+# Last updated: 8/14/2025, 10:05:37 AM
 class Solution:
-    def numKLenSubstrNoRepeats(self, s: str, k: int) -> int:
-        if k > len(s): return 0
-
+    def characterReplacement(self, s: str, k: int) -> int:
         left = 0
-        seen = set()
-        counter = 0
+        max_window = 0
+        max_freq = 0
+        freq = defaultdict(int)
 
         for right in range(len(s)):
-            while s[right] in seen:
-                seen.remove(s[left])
-                left += 1
-            
-            seen.add(s[right])
+            freq[s[right]] += 1
+            max_freq = max(max_freq, freq[s[right]])
 
-            if right - left + 1 >= k:
-                counter += 1
-                seen.remove(s[left])
+            if (right - left + 1) - max_freq > k:
+                freq[s[left]] -= 1
                 left += 1
-        return counter
-        
+            max_window = max(max_window, right - left + 1)
+        return max_window
+
