@@ -1,4 +1,4 @@
-# Last updated: 6/17/2025, 10:34:53 PM
+# Last updated: 8/22/2025, 5:40:14 PM
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -7,17 +7,14 @@
 class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
         if head == None: return None
-        
-        dummy = ListNode(-1)
+
+        dummy = ListNode()
         dummy.next = head
-        current = dummy
+        curr = dummy
 
-        while current.next:
-            if current.next.val == val:
-                current.next = current.next.next
+        while curr.next:
+            if curr.next.val == val:
+                curr.next = curr.next.next
             else:
-                current = current.next
+                curr = curr.next
         return dummy.next
-
-
-        
