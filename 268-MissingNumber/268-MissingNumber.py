@@ -1,4 +1,4 @@
-# Last updated: 8/22/2025, 2:13:23 PM
+# Last updated: 8/22/2025, 2:16:29 PM
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
         '''
@@ -10,8 +10,9 @@ class Solution:
         complete array: [0,1,2,3,4,5]
         missing number: 0
         '''
+        s = set(nums)
         n = len(nums)
         for i in range(0, n+1):
-            if i not in nums:
+            if i not in s:
                 return i
 
