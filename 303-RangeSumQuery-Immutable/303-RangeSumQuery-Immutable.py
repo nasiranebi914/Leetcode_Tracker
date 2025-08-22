@@ -1,4 +1,4 @@
-# Last updated: 8/22/2025, 3:15:55 PM
+# Last updated: 8/22/2025, 3:20:09 PM
 class NumArray:
 
     def __init__(self, nums: List[int]):
@@ -6,10 +6,11 @@ class NumArray:
         
 
     def sumRange(self, left: int, right: int) -> int:
-        res = 0
-        for num in range(left, right+1):
-            res += self.nums[num]
-        return res
+        n = len(self.nums)
+        res = [0] * (n+1)
+        for i in range(left, right+1):
+            res[i+1] = res[i] + self.nums[i]
+        return res[i+1]
         
 
 
