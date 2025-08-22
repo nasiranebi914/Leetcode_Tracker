@@ -1,4 +1,4 @@
-# Last updated: 8/8/2025, 2:47:57 PM
+# Last updated: 8/22/2025, 5:56:39 PM
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
         if not intervals:
@@ -6,8 +6,8 @@ class Solution:
         intervals.sort(key = lambda x : x[0])
         prevEnd = intervals[0][1]
         for i in intervals[1:]:
-            if prevEnd <= i[0]:
-                prevEnd = i[1]
+            if i[0] >= prevEnd:
+                prevEnd= i[1]
             else:
                 return False
         return True
