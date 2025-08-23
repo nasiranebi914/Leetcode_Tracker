@@ -1,4 +1,4 @@
-# Last updated: 8/22/2025, 10:23:15 PM
+# Last updated: 8/22/2025, 10:45:21 PM
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
         '''
