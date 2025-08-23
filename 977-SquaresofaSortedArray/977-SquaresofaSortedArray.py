@@ -1,20 +1,26 @@
-# Last updated: 8/22/2025, 9:37:27 PM
+# Last updated: 8/22/2025, 10:23:15 PM
 class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-        """
-        Do not return anything, modify nums1 in-place instead.
-        """
-        if m == 0:
-            nums1[:] = nums2 
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        '''
+        Questions: what is the range of numbers? any non-number elements?
+        input: array sorted 
+        output: new sorted array with squares of old array
 
-        i = len(nums1)-1
-        j = len(nums2)-1
-        k = m-1
-        while j >= 0:
-            if k >= 0 and nums1[k] > nums2[j]:
-                nums1[i] = nums1[k]
-                k-= 1
+        brute force:
+        - for loop, calculate sqrt of each element add to res
+        - sort res
+        O(nlogn), O(n) n is length of array
+        '''
+        i = 0
+        j = len(nums)-1
+        res = [0] * len(nums)
+        for k in range(len(nums)-1, -1, -1):
+            if abs(nums[i]) > abs(nums[j]):
+                res[k] = nums[i] ** 2
+                i += 1
             else:
-                nums1[i] = nums2[j]
+                res[k] = nums[j] ** 2
                 j -= 1
-            i -= 1
+        return res
+        
+        
