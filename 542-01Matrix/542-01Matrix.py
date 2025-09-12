@@ -1,4 +1,4 @@
-# Last updated: 9/12/2025, 2:49:23 PM
+# Last updated: 9/12/2025, 2:50:05 PM
 class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         queue = deque()
@@ -19,7 +19,7 @@ class Solution:
             r,c,path = queue.popleft()
             for dr,dc in directions:
                 nr,nc = dr+r,dc+c
-                if 0<=nr<rows and 0<=nc<cols and mat[nr][nc] != 0 and (nr,nc) not in seen:
+                if 0<=nr<rows and 0<=nc<cols and (nr,nc) not in seen:
                     mat[nr][nc] = path+1
                     seen.add((nr,nc))
                     queue.append((nr,nc,path+1))
