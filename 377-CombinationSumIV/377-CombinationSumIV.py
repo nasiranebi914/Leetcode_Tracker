@@ -1,19 +1,23 @@
-# Last updated: 10/22/2025, 5:35:50 PM
+# Last updated: 10/22/2025, 6:59:03 PM
 class Solution:
-    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        # 1. build graph
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         graph = defaultdict(list)
-        for u,v,w in times:
-            graph[u].append([v,w])
+        for s,d,p in flights:
+            graph[s].append([d,p])
 
-        # 2. heapify
-        heap = [[0,k]]
+        heap = [[0,src,0]]
         visited = {}
+        prices = []
         while heap:
-            time,node = heapq.heappop(heap)
-            if node not in visited:
-                visited[node] = time
-                for v,w in graph[node]:
-                    new_time = time+w
-                    heapq.heappush(heap, [new_time, v])
-        return -1 if len(visited) < n else max(visited.values())
+            price,node,stops = heapq.heappop(heap)
+            if node == dst and stops <= k+1:
+                return price
+            if stops > k:
+                continue
+            if (node in visited and visited[node] <= stops):
+                continue
+            visited[node] = stops
+
+            for d,p in graph[node]:
+                heapq.heappush(heap, [p+price, d, stops+1])
+        return -1
