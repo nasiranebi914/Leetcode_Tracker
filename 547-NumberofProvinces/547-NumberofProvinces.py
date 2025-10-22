@@ -1,4 +1,4 @@
-# Last updated: 8/5/2025, 10:45:33 AM
+# Last updated: 10/22/2025, 11:36:03 AM
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
         # build edges that has the connected nodes
