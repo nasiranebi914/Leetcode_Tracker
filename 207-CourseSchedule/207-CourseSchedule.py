@@ -1,24 +1,30 @@
-# Last updated: 7/23/2025, 2:39:30 PM
+# Last updated: 10/22/2025, 11:50:10 AM
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        # create a graph and count the degrees
-        graph = defaultdict(list)
+        # 1. build graph
+        courses = defaultdict(list)
         degree = [0] * numCourses
         for v,e in prerequisites:
-            graph[e].append(v)
+            courses[e].append(v)
             degree[v] += 1
-        # create a queue with the 0 degrees
+        # 2. add 0 degree courses to the queue
         queue = deque([i for i in range(numCourses) if degree[i] == 0])
-        
-        # start bfs
+
+        # 3. start counting
         counter = 0
         while queue:
-            node = queue.popleft()
+            course = queue.popleft()
             counter += 1
-            for neighbor in graph[node]:
+            for neighbor in courses[course]:
                 degree[neighbor] -= 1
                 if degree[neighbor] == 0:
                     queue.append(neighbor)
         return counter == numCourses
+        
+
+
+
+
+        
         
         
