@@ -1,15 +1,30 @@
-# Last updated: 8/19/2025, 3:38:13 PM
+# Last updated: 11/13/2025, 4:24:42 PM
 class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        res = []
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s2) < len(s1): return False
+    
+        counter_a = defaultdict(int)
+        counter_b = defaultdict(int)
+        left = 0
 
-        def backtrack(curr):
-            if len(curr) == len(nums):
-                res.append(curr[:])
-            for i in range(len(nums)):
-                if nums[i] not in curr:
-                    curr.append(nums[i])
-                    backtrack(curr)
-                    curr.pop()
-        backtrack([])
-        return res
+        for i in s1:
+            counter_a[i] += 1
+        
+        for right in range(len(s2)):
+            counter_b[s2[right]] += 1
+
+            if right - left + 1 > len(s1):
+                counter_b[s2[left]] -= 1
+                if counter_b[s2[left]] == 0: del counter_b[s2[left]]
+                left += 1
+            
+            if right - left + 1 == len(s1):
+                if counter_a == counter_b:
+                    return True
+            
+        return False
+
+
+
+
+        
