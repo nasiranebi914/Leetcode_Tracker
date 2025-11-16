@@ -1,7 +1,7 @@
-# Last updated: 11/16/2025, 2:09:33 PM
+# Last updated: 11/16/2025, 2:10:25 PM
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-        intervals.sort(key = lambda x : x[0])
+        intervals.sort(key = lambda x : x[1])
 
         prevEnd = intervals[0][1]
         counter = 0
@@ -10,7 +10,6 @@ class Solution:
             if i[0] >= prevEnd:
                 prevEnd = i[1]
             else:
-                prevEnd = min(prevEnd, i[1])
                 counter += 1
 
         return counter
