@@ -1,15 +1,18 @@
-# Last updated: 11/16/2025, 1:56:57 PM
-class Solution(object):
-    def canAttendMeetings(self, intervals):
-        if not intervals:
-            return True
-        # if there is overlapp, return False
-        intervals.sort(key = lambda x:x[0])
+# Last updated: 11/16/2025, 2:09:33 PM
+class Solution:
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        intervals.sort(key = lambda x : x[0])
+
         prevEnd = intervals[0][1]
+        counter = 0
 
         for i in intervals[1:]:
             if i[0] >= prevEnd:
                 prevEnd = i[1]
             else:
-                return False
-        return True
+                prevEnd = min(prevEnd, i[1])
+                counter += 1
+
+        return counter
+
+        
