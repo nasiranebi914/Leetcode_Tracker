@@ -1,14 +1,25 @@
-# Last updated: 8/7/2025, 5:52:02 PM
+# Last updated: 11/16/2025, 9:37:25 PM
 class Solution:
-    def removeInterval(self, intervals: List[List[int]], toBeRemoved: List[int]) -> List[List[int]]:
-        ans = []
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        if not intervals:
+            return [newInterval]
+        
+        i = 0
+        j = len(intervals)-1
 
-        for i in intervals:
-            if i[1] <= toBeRemoved[0] or i[0] >= toBeRemoved[1]:
-                ans.append(i)
+        while i <= j:
+            mid = (i+j)//2
+            if intervals[mid][0] < newInterval[0]:
+                i = mid+1
             else:
-                if i[0] < toBeRemoved[0]:
-                    ans.append([i[0], toBeRemoved[0]])
-                if toBeRemoved[1] < i[1]:
-                    ans.append([toBeRemoved[1], i[1]])
-        return ans
+                j = mid-1
+        intervals.insert(i, newInterval)
+
+        merged = []
+        for interval in intervals:
+            if not merged or merged[-1][1] < interval[0]:
+                merged.append(interval)
+            else:
+                merged[-1][1] = max(merged[-1][1], interval[1])
+                
+        return merged
