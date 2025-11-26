@@ -1,17 +1,15 @@
-# Last updated: 11/26/2025, 11:50:35 AM
-1class Solution(object):
-2    # Window Slicing problem
-3    def lengthOfLongestSubstring(self, s):
-4        seen = {}
+# Last updated: 11/26/2025, 11:50:57 AM
+1class Solution:
+2    def lengthOfLongestSubstring(self, s: str) -> int:
+3        seen = {}
+4        max_len = 0
 5        left = 0
-6        max_len = 0
-7
-8        for right in range(len(s)):
-9            if s[right] in seen and seen[s[right]] >= left:
-10                left = seen[s[right]] + 1
-11            seen[s[right]] = right
-12            max_len = max(max_len, right-left+1)
-13        return max_len
+6
+7        for right in range(len(s)):
+8            if s[right] in seen and seen[s[right]] >= left:
+9                left = seen[s[right]]+1
+10            seen[s[right]] = right
+11            max_len = max(max_len, right-left+1)
+12        return max_len
+13
 14
-15
-16        
